@@ -109,7 +109,7 @@ class camControl():
         time.sleep(0.1)
 
     def capture(self):
-        self.cam.capture(self.rawCap, format="bgr", use_video_port=True)
+        self.cam.capture(self.rawCap, format="bgr")
         self.frame = np.array(self.rawCap.array)
         return self.frame
 
@@ -144,13 +144,13 @@ def main():
     while True:
         frame = cam.capture()
 
-        red.loopDetection(frame)
-        green.loopDetection(frame)
+        # red.loopDetection(frame)
+        # green.loopDetection(frame)
 
-        frameElements.drawRedBox(frame, red.ret)
-        frameElements.drawGreenBox(frame, green.ret)
-        frameElements.drawDetectionbox(frame)
-        frameElements.showFrame(frame, "Test")
+        # frameElements.drawRedBox(frame, red.ret)
+        # frameElements.drawGreenBox(frame, green.ret)
+        # frameElements.drawDetectionbox(frame)
+        # frameElements.showFrame(frame, "Test")
 
         cam.clear()
 
