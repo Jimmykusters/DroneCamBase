@@ -6,6 +6,7 @@ import numpy as np
 import time
 import cv2
 from picamera import PiCamera
+from picamera.array import PiRGBArray
 
 greenColor = np.uint8([[[147,198,42]]]) 
 redColor = np.uint8([[[0,0,255]]]) 
