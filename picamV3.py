@@ -152,7 +152,7 @@ def main():
         frameElements.drawDetectionbox(frame)
         frameElements.showFrame(frame, "Test")
 
-        # cam.clear()
+        cam.clear()
 
         #To be able to stop the programm
         key = cv2.waitKey(1) & 0xFF
