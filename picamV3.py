@@ -165,7 +165,7 @@ def main():
     while True:
         frame = cam.capture()
 
-        # red.loopDetection(frame)
+        red.loopDetection(frame)
         green.loopDetection(frame)
 
         frameElements.drawRedBox(frame, red.ret)
