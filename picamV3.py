@@ -103,9 +103,9 @@ framerate = 15
 class camControl():
     def __init__(self):
         self.cam = PiCamera()
-		self.cam.rotation = rotation
         self.cam.resolution = resolution
         self.cam.framerate = framerate
+        self.cam.rotation = rotation
 
         self.rawCap = PiRGBArray(self.cam)
         time.sleep(0.1)
