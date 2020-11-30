@@ -8,7 +8,7 @@ import cv2
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 
-greenColor = np.uint8([[[147,198,42]]]) 
+greenColor = np.uint8([[[0,200,0]]]) 
 redColor = np.uint8([[[0,0,255]]]) 
 
 sampleRate = 10
