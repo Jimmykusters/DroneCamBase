@@ -172,7 +172,8 @@ def main():
         frameElements.drawGreenBox(frame, green.ret)
         # frameElements.drawDetectionbox(frame)
         frameElements.showFrame(frame, "Test")
-
+        frameElements.showFrame(green.hsv, "hsv")
+        frameElements.showFrame(green.ret, "hsv")
         cam.clear()
 
         #To be able to stop the programm
