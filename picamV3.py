@@ -173,7 +173,7 @@ def main():
         # frameElements.drawDetectionbox(frame)
         frameElements.showFrame(frame, "Test")
         frameElements.showFrame(green.hsv, "hsv")
-        frameElements.showFrame(green.ret, "hsv")
+        frameElements.showFrame(green.dst, "hsv")
         cam.clear()
 
         #To be able to stop the programm
