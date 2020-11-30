@@ -15,7 +15,7 @@ sampleRate = 10
 sampleCounter = 0
 
 #camSetting
-resolution = (640, 480)
+resolution = (2592, 1944)
 rotation = 180
 framerate = 15
 
