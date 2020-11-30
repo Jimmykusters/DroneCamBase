@@ -9,7 +9,7 @@ from picamera import PiCamera
 from picamera.array import PiRGBArray
 
 greenColor = np.uint8([[[147,198,42]]]) 
-# redColor = np.uint8([[[0,0,255]]]) 
+redColor = np.uint8([[[0,0,255]]]) 
 
 sampleRate = 10
 sampleCounter = 0
