@@ -1,12 +1,12 @@
-# #This file was created to test the can detection
-# ##Code is implemented in robot.py
-# # from picamera.array import PiRGBArray
-# # from picamera import PiCamera
-# import numpy as np
-# import time
-# import cv2
-# from picamera import PiCamera
+#This file was created to test the can detection
+##Code is implemented in robot.py
 # from picamera.array import PiRGBArray
+# from picamera import PiCamera
+import numpy as np
+import time
+import cv2
+from picamera import PiCamera
+from picamera.array import PiRGBArray
 
 # greenColor = np.uint8([[[147,198,42]]]) 
 # redColor = np.uint8([[[0,0,255]]]) 
@@ -14,9 +14,10 @@
 # sampleRate = 10
 # sampleCounter = 0
 
-# #camSetting
-# resolution = (640, 480)
-# framerate = 15
+#camSetting
+resolution = (640, 480)
+rotation = 180
+framerate = 15
 
 # term_crit = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 300, 1)
    
@@ -99,93 +100,85 @@
 #     def showFrame(self, frame, title):
 #         cv2.imshow(title, frame)
 
-# class camControl():
+class camControl():
+    def __init__(self):
+        self.cam = PiCamera()
+		self.cam.rotation = rotation
+        self.cam.resolution = resolution
+        self.cam.framerate = framerate
+
+        self.rawCap = PiRGBArray(self.cam)
+        time.sleep(0.1)
+
+    def capture(self):
+        self.cam.capture(self.rawCap, format="bgr")
+        self.frame = np.array(self.rawCap.array)
+        return self.frame
+
+    def clear(self):
+        self.rawCap.truncate(0)
+
+# class USBcamControl():
 #     def __init__(self):
-#         self.cam = PiCamera()
-#         self.cam.resolution = resolution
-#         self.cam.framerate = framerate
-
-#         self.rawCap = PiRGBArray(self.cam)
-#         time.sleep(0.1)
-
+#         self.cap = cv2.VideoCapture(0)
+# 
 #     def capture(self):
-#         self.cam.capture(self.rawCap, format="bgr")
-#         self.frame = np.array(self.rawCap.array)
+#         self.ret, self.raw = self.cap.read()
+#         self.frame = np.array(self.raw)
 #         return self.frame
 
 #     def clear(self):
 #         self.rawCap.truncate(0)
 
-# # class USBcamControl():
-# #     def __init__(self):
-# #         self.cap = cv2.VideoCapture(0)
-
-# #     def capture(self):
-# #         self.ret, self.raw = self.cap.read()
-# #         self.frame = np.array(self.raw)
-# #         return self.frame
-
-#     # def clear(self):
-#     #     self.rawCap.truncate(0)
-
+# def main():
+# 	# initialize the camera and grab a reference to the raw camera capture
+# 	camera = camControl()
+# 	rawCapture = PiRGBArray(camera, size=(640, 480))
+# 	# allow the camera to warmup
+# 	time.sleep(0.1)
+# 	# capture frames from the camera
+# 	for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+# 		# grab the raw NumPy array representing the image, then initialize the timestamp
+# 		# and occupied/unoccupied text
+# 		image = frame.array
+# 		# show the frame
+# 		cv2.imshow("Frame", image)
+# 		key = cv2.waitKey(1) & 0xFF
+# 		# clear the stream in preparation for the next frame
+# 		rawCapture.truncate(0)
+# 		# if the `q` key was pressed, break from the loop
+# 		if key == ord("q"):
+# 			break
 
 # # stap 1:
-# def main():
-#     cam           = camControl()
-#     frameElements = drawFrameElements()
+def main():
+    cam           = camControl()
+    # frameElements = drawFrameElements()
 
-#     first_frame = cam.capture()
-#     frameElements.drawDetectionbox(first_frame)
-#     green = DetectCans(greenColor, first_frame)
-#     red   = DetectCans(redColor, first_frame)
+    first_frame = cam.capture()
+    # frameElements.drawDetectionbox(first_frame)
+    # green = DetectCans(greenColor, first_frame)
+    # red   = DetectCans(redColor, first_frame)
 
-#     # cam.clear()
+    cam.clear()
 
-#     while True:
-#         frame = cam.capture()
+    while True:
+        frame = cam.capture()
 
-#         # red.loopDetection(frame)
-#         # green.loopDetection(frame)
+        # red.loopDetection(frame)
+        # green.loopDetection(frame)
 
-#         # frameElements.drawRedBox(frame, red.ret)
-#         # frameElements.drawGreenBox(frame, green.ret)
-#         # frameElements.drawDetectionbox(frame)
-#         # frameElements.showFrame(frame, "Test")
+        # frameElements.drawRedBox(frame, red.ret)
+        # frameElements.drawGreenBox(frame, green.ret)
+        # frameElements.drawDetectionbox(frame)
+        # frameElements.showFrame(frame, "Test")
 
-#         cam.clear()
+        cam.clear()
 
-#         #To be able to stop the programm
-#         key = cv2.waitKey(1) & 0xFF
-#         if key == ord("q"): 
-#             break
+        #To be able to stop the programm
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord("q"): 
+            break
 
-# if __name__ == "__main__":
-#     main()
-
-
-# import the necessary packages
-from picamera.array import PiRGBArray
-from picamera import PiCamera
-import time
-import cv2
-# initialize the camera and grab a reference to the raw camera capture
-camera = PiCamera()
-camera.resolution = (640, 480)
-camera.rotation = 180
-camera.framerate = 32
-rawCapture = PiRGBArray(camera, size=(640, 480))
-# allow the camera to warmup
-time.sleep(0.1)
-# capture frames from the camera
-for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-	# grab the raw NumPy array representing the image, then initialize the timestamp
-	# and occupied/unoccupied text
-	image = frame.array
-	# show the frame
-	cv2.imshow("Frame", image)
-	key = cv2.waitKey(1) & 0xFF
-	# clear the stream in preparation for the next frame
-	rawCapture.truncate(0)
-	# if the `q` key was pressed, break from the loop
-	if key == ord("q"):
-		break
+if __name__ == "__main__":
+    main()
