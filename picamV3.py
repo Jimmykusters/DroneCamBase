@@ -15,7 +15,7 @@ sampleRate = 10
 sampleCounter = 0
 
 #camSetting
-resolution = (2592, 1944)
+resolution = (1920, 1080)
 rotation = 180
 framerate = 15
 
@@ -106,6 +106,7 @@ class camControl():
         self.cam.resolution = resolution
         self.cam.framerate = framerate
         self.cam.rotation = rotation
+		self.cam.exposure_mode = 'night'
 
         self.rawCap = PiRGBArray(self.cam)
         time.sleep(0.1)
