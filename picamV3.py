@@ -106,7 +106,7 @@ class camControl():
         self.cam.resolution = resolution
         self.cam.framerate = framerate
         self.cam.rotation = rotation
-		self.cam.exposure_mode = 'night'
+        self.cam.exposure_mode = 'night'
 
         self.rawCap = PiRGBArray(self.cam)
         time.sleep(0.1)
