@@ -161,7 +161,7 @@ def main():
     green = DetectCans(greenColor, first_frame)
     red   = DetectCans(redColor, first_frame)
 
-    cam.clear()
+    #cam.clear()
 
     while True:
         frame = cam.capture()
@@ -175,7 +175,7 @@ def main():
         frameElements.showFrame(frame, "Test")
         # frameElements.showFrame(green.hsv, "hsv")
         # frameElements.showFrame(green.dst, "dst")
-        cam.clear()
+        #cam.clear()
 
         #To be able to stop the programm
         key = cv2.waitKey(1) & 0xFF
