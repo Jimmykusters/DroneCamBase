@@ -128,8 +128,8 @@ class USBcamControl():
         self.frame = np.array(self.raw)
         return self.frame
 
-    def clear(self):
-        self.cap.truncate(0)
+    # def clear(self):
+    #     self.cap.truncate(0)
 
 # def main():
 # 	# initialize the camera and grab a reference to the raw camera capture
