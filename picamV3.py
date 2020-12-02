@@ -119,17 +119,17 @@ class camControl():
     def clear(self):
         self.rawCap.truncate(0)
 
-# class USBcamControl():
-#     def __init__(self):
-#         self.cap = cv2.VideoCapture(0)
-# 
-#     def capture(self):
-#         self.ret, self.raw = self.cap.read()
-#         self.frame = np.array(self.raw)
-#         return self.frame
+class USBcamControl():
+    def __init__(self):
+        self.cap = cv2.VideoCapture(0)
 
-#     def clear(self):
-#         self.rawCap.truncate(0)
+    def capture(self):
+        self.ret, self.raw = self.cap.read()
+        self.frame = np.array(self.raw)
+        return self.frame
+
+    def clear(self):
+        self.rawCap.truncate(0)
 
 # def main():
 # 	# initialize the camera and grab a reference to the raw camera capture
@@ -153,7 +153,7 @@ class camControl():
 
 # # stap 1:
 def main():
-    cam           = camControl()
+    cam           = USBcamControl()
     frameElements = drawFrameElements()
 
     first_frame = cam.capture()
