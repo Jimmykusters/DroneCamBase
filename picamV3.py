@@ -129,7 +129,7 @@ class USBcamControl():
         return self.frame
 
     def clear(self):
-        self.rawCap.truncate(0)
+        self.cap.truncate(0)
 
 # def main():
 # 	# initialize the camera and grab a reference to the raw camera capture
