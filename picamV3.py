@@ -122,7 +122,7 @@ class camControl():
 
 class USBcamControl():
     def __init__(self):
-        self.cap = cv2.VideoCapture(1)
+        self.cap = cv2.VideoCapture(-1)
 
     def capture(self):
         self.ret, self.raw = self.cap.read()
