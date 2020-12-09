@@ -63,7 +63,7 @@ class DetectCans():
 
     def loopDetection(self, frame):
         self.hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        self.res = cv2.bitwise_and(frame, frame, mask= mask)
+        self.res = cv2.bitwise_and(frame, frame, mask= self.mask)
         # self.dst = cv2.calcBackProject([self.hsv],[self.channel], self.roi_hist,[0,180],1)
         # self.ret, self.track_window = cv2.CamShift(self.dst, (x,y,width,height), term_crit)
 
