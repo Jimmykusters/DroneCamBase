@@ -37,7 +37,7 @@ class DetectCans():
         self.hue = self.hsv_color[0][0][0]
 
     def determinRange(self):
-            self.lower_red = np.array([30,150,50])
+            self.lower_red = np.array([12,22,121])
             self.upper_red = np.array([255,255,180])
     
             
