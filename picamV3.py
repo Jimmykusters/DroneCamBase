@@ -37,10 +37,9 @@ class DetectCans():
         self.hue = self.hsv_color[0][0][0]
 
     def determinRange(self):
-            lower_red = np.array([30,150,50])
-            upper_red = np.array([255,255,180])
+            self.lower_red = np.array([30,150,50])
+            self.upper_red = np.array([255,255,180])
     
-            self.mask = cv2.inRange(self.hsv_color, lower_red, upper_red)
             
         # if self.hue <= 30: # red
         #     self.lower_range = np.array([0, 70, 50], dtype=np.uint8)
@@ -63,6 +62,7 @@ class DetectCans():
 
     def loopDetection(self, frame):
         self.hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        self.mask = cv2.inRange(self.hsv, self.lower_red, self.upper_red)
         self.res = cv2.bitwise_and(frame, frame, mask= self.mask)
         # self.dst = cv2.calcBackProject([self.hsv],[self.channel], self.roi_hist,[0,180],1)
         # self.ret, self.track_window = cv2.CamShift(self.dst, (x,y,width,height), term_crit)
