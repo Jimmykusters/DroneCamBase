@@ -174,7 +174,7 @@ def main():
         # frameElements.drawGreenBox(frame, green.ret)
         # # frameElements.drawDetectionbox(frame)
         frameElements.showFrame(frame, "Test")
-        frameElements.showFrame(green.hsv, "hsv")
+        frameElements.showFrame(White.hsv, "hsv")
         # frameElements.showFrame(green.dst, "dst")
         #cam.clear()
 
