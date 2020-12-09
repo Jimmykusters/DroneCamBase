@@ -32,8 +32,8 @@ class DetectCans():
         self.determineHue(color, frame)
         self.determinRange()
 
-    def determineHue(self, color, frame):
-        self.hsv_color = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    def determineHue(self, color):
+        self.hsv_color = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
         self.hue = self.hsv_color[0][0][0]
 
     def determinRange(self):
