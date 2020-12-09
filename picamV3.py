@@ -176,7 +176,7 @@ def main():
         red.loopDetection(frame)
         # green.loopDetection(frame)
 
-        frameElements.drawRedBox(frame, red.res)
+        # frameElements.drawRedBox(frame, red.res)
         # frameElements.drawGreenBox(frame, green.ret)
         # # frameElements.drawDetectionbox(frame)
         frameElements.showFrame(frame, "Test")
