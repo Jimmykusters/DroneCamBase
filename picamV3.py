@@ -159,8 +159,8 @@ def main():
 
     first_frame = cam.capture()
     frameElements.drawDetectionbox(first_frame)
-    White = DetectCans(WhiteColor, first_frame)
-    #red   = DetectCans(redColor, first_frame)
+    #White = DetectCans(WhiteColor, first_frame)
+    red   = DetectCans(redColor, first_frame)
 
     #cam.clear()
 
@@ -170,11 +170,11 @@ def main():
         White.loopDetection(frame)
         # green.loopDetection(frame)
 
-        frameElements.drawRedBox(frame, White.ret)
+        frameElements.drawRedBox(frame, red.ret)
         # frameElements.drawGreenBox(frame, green.ret)
         # # frameElements.drawDetectionbox(frame)
         frameElements.showFrame(frame, "Test")
-        frameElements.showFrame(White.hsv, "hsv")
+        frameElements.showFrame(red.hsv, "hsv")
         # frameElements.showFrame(green.dst, "dst")
         #cam.clear()
 
