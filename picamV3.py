@@ -29,7 +29,7 @@ x,y,width,height = 250,90,400,125
 class DetectCans():
     def __init__(self, color, frame):
         self.channel = 0
-        self.determineHue(color)
+        self.determineHue(color, frame)
         self.determinRange()
 
     def determineHue(self, color, frame):
