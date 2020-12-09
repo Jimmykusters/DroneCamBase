@@ -37,29 +37,35 @@ class DetectCans():
         self.hue = self.hsv_color[0][0][0]
 
     def determinRange(self):
-        if self.hue <= 30: # red
-            self.lower_range = np.array([0, 70, 50], dtype=np.uint8)
-            self.upper_range = np.array([10, 255, 255], dtype=np.uint8)
+            lower_red = np.array([30,150,50])
+            upper_red = np.array([255,255,180])
+    
+            self.mask = cv2.inRange(self.hsv_color, lower_red, upper_red)
+            
+        # if self.hue <= 30: # red
+        #     self.lower_range = np.array([0, 70, 50], dtype=np.uint8)
+        #     self.upper_range = np.array([10, 255, 255], dtype=np.uint8)
 
-            self.lower_range2 = np.array([170, 70, 50], dtype=np.uint8)
-            self.upper_range2 = np.array([180, 255, 255], dtype=np.uint8)
+        #     self.lower_range2 = np.array([170, 70, 50], dtype=np.uint8)
+        #     self.upper_range2 = np.array([180, 255, 255], dtype=np.uint8)
 
-            self.mask1      = cv2.inRange(self.hsv_color, self.lower_range, self.upper_range)
-            self.mask2      = cv2.inRange(self.hsv_color, self.lower_range2, self.upper_range2)
-            self.mask       = cv2.bitwise_or(self.mask1, self.mask2)
-            self.roi_hist  = cv2.calcHist([self.hsv_color],[self.channel],self.mask,[180],[0,180])
-            cv2.normalize(self.roi_hist,self.roi_hist,0,255,cv2.NORM_MINMAX)
-        else: #greem
-            self.lower_range = np.array([self.hue-15, 100, 50], dtype=np.uint8)
-            self.upper_range = np.array([self.hue+15, 255, 255], dtype=np.uint8)
-            self.mask = cv2.inRange(self.hsv_color, self.lower_range, self.upper_range)
-            self.roi_hist = cv2.calcHist([self.hsv_color],[self.channel],self.mask,[180],[0,180])
-            cv2.normalize(self.roi_hist,self.roi_hist,0,255,cv2.NORM_MINMAX)
+        #     self.mask1      = cv2.inRange(self.hsv_color, self.lower_range, self.upper_range)
+        #     self.mask2      = cv2.inRange(self.hsv_color, self.lower_range2, self.upper_range2)
+        #     self.mask       = cv2.bitwise_or(self.mask1, self.mask2)
+        #     self.roi_hist  = cv2.calcHist([self.hsv_color],[self.channel],self.mask,[180],[0,180])
+        #     cv2.normalize(self.roi_hist,self.roi_hist,0,255,cv2.NORM_MINMAX)
+        # else: #greem
+        #     self.lower_range = np.array([self.hue-15, 100, 50], dtype=np.uint8)
+        #     self.upper_range = np.array([self.hue+15, 255, 255], dtype=np.uint8)
+        #     self.mask = cv2.inRange(self.hsv_color, self.lower_range, self.upper_range)
+        #     self.roi_hist = cv2.calcHist([self.hsv_color],[self.channel],self.mask,[180],[0,180])
+        #     cv2.normalize(self.roi_hist,self.roi_hist,0,255,cv2.NORM_MINMAX)
 
     def loopDetection(self, frame):
         self.hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        self.dst = cv2.calcBackProject([self.hsv],[self.channel], self.roi_hist,[0,180],1)
-        self.ret, self.track_window = cv2.CamShift(self.dst, (x,y,width,height), term_crit)
+        self.res = cv2.bitwise_and(frame, frame, mask= mask)
+        # self.dst = cv2.calcBackProject([self.hsv],[self.channel], self.roi_hist,[0,180],1)
+        # self.ret, self.track_window = cv2.CamShift(self.dst, (x,y,width,height), term_crit)
 
 class drawFrameElements():
     def __init__(self):
@@ -166,7 +172,7 @@ def main():
 
     while True:
         frame = cam.capture()
-        
+
         red.loopDetection(frame)
         # green.loopDetection(frame)
 
@@ -174,7 +180,7 @@ def main():
         # frameElements.drawGreenBox(frame, green.ret)
         # # frameElements.drawDetectionbox(frame)
         frameElements.showFrame(frame, "Test")
-        frameElements.showFrame(red.hsv, "hsv")
+        frameElements.showFrame(red.res, "hsv")
         # frameElements.showFrame(green.dst, "dst")
         #cam.clear()
 
