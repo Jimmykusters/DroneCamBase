@@ -16,6 +16,7 @@ class USBcamControl():
     def capture(self):
         self.ret, self.raw = self.cap.read()
         self.frame = np.array(self.raw)
+        self.frame = cv2.rotate(self.frame, cv2.ROTATE_180_CLOCKWISE)
         return self.frame
 
 def main():
