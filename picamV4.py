@@ -48,14 +48,31 @@ def main():
             numPixels = cv2.countNonZero(labelMask)
             # if the number of pixels in the component is sufficiently
             # large, then add it to our mask of "large blobs"
-            if numPixels > 10:
+            if numPixels > 5:
                 mask = cv2.add(mask, labelMask)
+
+        # find the contours in the mask, then sort them from left to
+        # right
+        cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
+            cv2.CHAIN_APPROX_SIMPLE)
+        cnts = imutils.grab_contours(cnts)
+        cnts = contours.sort_contours(cnts)[0]
+        # loop over the contours
+        for (i, c) in enumerate(cnts):
+            # draw the bright spot on the image
+            (x, y, w, h) = cv2.boundingRect(c)
+            ((cX, cY), radius) = cv2.minEnclosingCircle(c)
+            cv2.circle(frame, (int(cX), int(cY)), int(radius),
+                (0, 0, 255), 3)
+            cv2.putText(frame, "#{}".format(i + 1), (x, y - 15),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+        # show the output image
 
         # perform a series of erosions and dilations to remove
         # any small blobs of noise from the thresholded image
         # thresh = cv2.erode(thresh, None, iterations=2)
         # thresh = cv2.dilate(thresh, None, iterations=4)
-        cv2.imshow("frame hold image", thresh)
+        cv2.imshow("frame", frame)
 
         cv2.imshow("Thresh hold image", mask)
 
