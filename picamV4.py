@@ -6,26 +6,17 @@ import argparse
 import imutils
 import cv2
 import time
-from picamera import PiCamera
-from picamera.array import PiRGBArray
+# from picamera import PiCamera
+# from picamera.array import PiRGBArray
 
-class camControl():
-    def __init__(self, resolution = (960, 720), framerate = 15, rotation = 0):
-        self.cam = PiCamera()
-        self.cam.resolution = resolution
-        self.cam.framerate = framerate
-        self.cam.rotation = rotation
-
-        self.rawCap = PiRGBArray(self.cam)
-        time.sleep(0.1)
+class USBcamControl():
+    def __init__(self):
+        self.cap = cv2.VideoCapture(-1)
 
     def capture(self):
-        self.cam.capture(self.rawCap, format="bgr")
-        self.frame = np.array(self.rawCap.array)
+        self.ret, self.raw = self.cap.read()
+        self.frame = np.array(self.raw)
         return self.frame
-
-    def clear(self):
-        self.rawCap.truncate(0)
 
 
 
