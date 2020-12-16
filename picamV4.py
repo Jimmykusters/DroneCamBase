@@ -60,12 +60,13 @@ def main():
         # loop over the contours
         for (i, c) in enumerate(cnts):
             # draw the bright spot on the image
-            print(f"cnts = {cnts}, I = {i}, C = {c}")
+            #print(f"cnts = {cnts}, I = {i}, C = {c}")
 
             (x, y, w, h) = cv2.boundingRect(c)
             ((cX, cY), radius) = cv2.minEnclosingCircle(c)
-            cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
-            cv2.putText(frame, "#{}".format(i + 1), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+            if radius > 10:
+                cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
+                cv2.putText(frame, "#{}".format(i + 1), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
         # show the output image
 
         # perform a series of erosions and dilations to remove
