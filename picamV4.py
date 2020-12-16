@@ -59,6 +59,8 @@ def main():
         # loop over the contours
         for (i, c) in enumerate(cnts):
             # draw the bright spot on the image
+            print(f"cnts = {cnts}, I = {i}, C = {c}")
+
             (x, y, w, h) = cv2.boundingRect(c)
             ((cX, cY), radius) = cv2.minEnclosingCircle(c)
             cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
