@@ -24,7 +24,7 @@ class USBcamControl():
 
 
 def main():
-    cam           = camControl()
+    cam           = USBcamControl()
 
     while True:
         frame = cam.capture()
