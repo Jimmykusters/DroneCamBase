@@ -53,8 +53,7 @@ def main():
 
         # find the contours in the mask, then sort them from left to
         # right
-        cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
-            cv2.CHAIN_APPROX_SIMPLE)
+        cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         cnts = imutils.grab_contours(cnts)
         cnts = contours.sort_contours(cnts)[0]
         # loop over the contours
@@ -62,10 +61,8 @@ def main():
             # draw the bright spot on the image
             (x, y, w, h) = cv2.boundingRect(c)
             ((cX, cY), radius) = cv2.minEnclosingCircle(c)
-            cv2.circle(frame, (int(cX), int(cY)), int(radius),
-                (0, 0, 255), 3)
-            cv2.putText(frame, "#{}".format(i + 1), (x, y - 15),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+            cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
+            cv2.putText(frame, "#{}".format(i + 1), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
         # show the output image
 
         # perform a series of erosions and dilations to remove
