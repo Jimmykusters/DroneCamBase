@@ -40,7 +40,8 @@ def main():
         # any small blobs of noise from the thresholded image
         thresh = cv2.erode(thresh, None, iterations=2)
         thresh = cv2.dilate(thresh, None, iterations=4)
-        cv2.imshow("Thresh hold image", gray)
+        cv2.imshow("gray hold image", gray)
+        
         cv2.imshow("Thresh hold image", thresh)
 
         #To be able to stop the programm
