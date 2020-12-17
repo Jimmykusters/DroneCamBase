@@ -24,13 +24,10 @@ class point():
         self.coordinates = [X, Y]
         self.ID = ID
 
-        point = []
-        distances = []
-
     def storeDist(self, pnt, dis):
         self.pnt = pnt
         self.dis = dis
-        print(f"Point {self.ID} has stored pnt: {pnt}, with dis: {dis}")
+        print(f"Point {self.ID} has stored pnt: {self.pnt}, with dis: {self.dis}")
     
 ####### Finding points
 def connectedComponentAnalysis(frame):
