@@ -96,9 +96,9 @@ def calculateDistances(points):
                 distance = np.sqrt((x1-x2)**2 + (y1-y2)**2)
                 dist_list.append(distance)
 
-        print(f"Point {ID1} x: {x1} y: {y1}")
-        print(f"Point {ID2} x: {x2} y: {y2}")
-        print(f"Distance between = {distance}")
+            print(f"Point {ID1} x: {x1} y: {y1}")
+            print(f"Point {ID2} x: {x2} y: {y2}")
+            print(f"Distance between = {distance}")
 
 
         
@@ -108,9 +108,7 @@ def main():
 
     frame = cam.capture()
 
-    frame, points = findPoints(frame)
-    for pnt in points:
-        print(f"points {pnt.ID} = {pnt.coordinates}")
+    frame, points = findPoints(frame)s
 
     calculateDistances(points)
 
