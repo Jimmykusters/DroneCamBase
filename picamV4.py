@@ -87,7 +87,7 @@ def main():
         frame, points = findPoints(frame)
 
         for pnt in points:
-            print(f"Point = {pnt.coordinates()}")
+            print(f"Point = {pnt}")
 
         cv2.imshow("frame", frame)
 
