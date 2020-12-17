@@ -49,7 +49,7 @@ def connectedComponentAnalysis(frame):
 def findContours(frame, mask):
     points = []
     # find the contours in the mask, then sort them from left to right
-    Contours = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    Contours = cv2.findContours(mask.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     Contours = imutils.grab_contours(Contours)
     Contours = contours.sort_contours(Contours)[0]
     # loop over the contours
