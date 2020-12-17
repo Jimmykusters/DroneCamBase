@@ -24,8 +24,6 @@ class point():
         self.coordinates = [X, Y]
         self.ID = ID
     
-    def coordinates(self):
-        return self.coordinates
 
 def connectedComponentAnalysis(frame):
     # perform a connected component analysis on the thresholded
@@ -87,7 +85,7 @@ def main():
         frame, points = findPoints(frame)
 
         for pnt in points:
-            print(f"Point = {pnt}")
+            print(f"Point {pnt.ID}= {pnt.coordinates}")
 
         cv2.imshow("frame", frame)
 
