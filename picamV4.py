@@ -107,22 +107,22 @@ def calculateDistances(points):
 def main():
     cam = USBcamControl()
 
-    frame = cam.capture()
+    # frame = cam.capture()
 
-    frame, points = findPoints(frame)
+    # frame, points = findPoints(frame)
 
-    calculateDistances(points)
+    # calculateDistances(points)
     
 
     while True:
+
+        frame = cam.capture()
+
+        frame, points = findPoints(frame)
+
+        calculateDistances(points)
+
         cv2.imshow("frame", frame)
-    #     frame = cam.capture()
-
-    #     frame, points = findPoints(frame)
-
-    #     calculateDistances(points)
-
-    #     cv2.imshow("frame", frame)
 
     #To be able to stop the programm
         key = cv2.waitKey(1) & 0xFF
