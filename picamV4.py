@@ -61,7 +61,9 @@ def findContours(frame, mask):
         if radius < 10:
             cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
             cv2.putText(frame, "#{}".format(i), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-    return frame
+            #Add point to list
+            points.append(point(cX, cY, i))
+    return frame, points
     
 
 def findPoints(frame):
@@ -70,8 +72,8 @@ def findPoints(frame):
     thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)[1]
 
     mask = connectedComponentAnalysis(thresh)
-    frame = findContours(frame, mask)
-    return frame
+    frame, points = findContours(frame, mask)
+    return frame, points
 
 
 def main():
@@ -80,7 +82,9 @@ def main():
     while True:
         frame = cam.capture()
 
-        frame = findPoints(frame)
+        frame, points = findPoints(frame)
+
+        print(f"Points = {points}")
 
         cv2.imshow("frame", frame)
 
