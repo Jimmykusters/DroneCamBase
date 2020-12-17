@@ -27,6 +27,10 @@ class point():
         point = []
         distances = []
 
+    def storeDist(self, pnt, dis):
+        self.pnt = pnt
+        self.dis = dis
+        print(f"Point {self.ID} has stored pnt: {pnt}, with dis: {dis}")
     
 ####### Finding points
 def connectedComponentAnalysis(frame):
@@ -80,20 +84,17 @@ def findPoints(frame):
 
 ######## Find triangles
 def calculateDistances(points):
-    all_dist = []
-    #Bereken voor alle punten
     for pnt in points:
-        #bepaal coordinaten voor dit punt
         ID1 = pnt.ID
-        print(f"Main Run : {ID1}")
         x1 = pnt.coordinates[0]
         y1 = pnt.coordinates[1]
         distance = 0
+
+        pnt_list = []
         dist_list = []
 
         for pnt2 in points:
             ID2 = pnt2.ID
-            print(f"Sub RUn : {ID2}")
             x2 = pnt2.coordinates[0]
             y2 = pnt2.coordinates[1]
 
@@ -101,13 +102,11 @@ def calculateDistances(points):
                 pass
             else:
                 distance = np.sqrt((x1-x2)**2 + (y1-y2)**2)
+                pnt_list.append(ID2)
                 dist_list.append(distance)
-        print(f"dist_list = {dist_list}, sorted = :{sorted(dist_list)}")
+        
+        pnt.storeDist(pnt_list, dist_list)
 
-        all_dist.append(sorted(dist_list))
-        
-    print(f"All distances = {all_dist}")
-        
 def main():
     cam = USBcamControl()
 
