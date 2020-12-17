@@ -76,6 +76,7 @@ def findPoints(frame):
 
 ######## Find triangles
 def calculateDistances(points):
+    all_dist = []
     #Bereken voor alle punten
     for pnt in points:
         #bepaal coordinaten voor dit punt
@@ -84,21 +85,24 @@ def calculateDistances(points):
         y1 = pnt.coordinates[1]
         distance = 0
         dist_list = []
-        sort_dist = []
 
-        for pnt in points:
-            ID2 = pnt.ID
-            x2 = pnt.coordinates[0]
-            y2 = pnt.coordinates[1]
+        for pnt2 in points:
+            ID2 = pnt2.ID
+            x2 = pnt2.coordinates[0]
+            y2 = pnt2.coordinates[1]
             if ID1 == ID2:
                 pass
             else:
                 distance = np.sqrt((x1-x2)**2 + (y1-y2)**2)
                 dist_list.append(distance)
 
-            print(f"Point {ID1} x: {x1} y: {y1}")
-            print(f"Point {ID2} x: {x2} y: {y2}")
-            print(f"Distance between = {distance}")
+                print(f"Point {ID1} x: {x1} y: {y1}")
+                print(f"Point {ID2} x: {x2} y: {y2}")
+                print(f"Distance between = {distance}")
+        print(f"Point {ID1} distances are: {dist_list}")
+        all_dist.append(dist_list)
+        
+    print(f"All distances = {all_dist}")
 
 
         
