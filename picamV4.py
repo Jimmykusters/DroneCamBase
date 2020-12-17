@@ -119,9 +119,10 @@ def main():
     frame, points = findPoints(frame)
 
     calculateDistances(points)
-    cv2.imshow("frame", frame)
+    
 
-    # while True:
+    while True:
+        cv2.imshow("frame", frame)
     #     frame = cam.capture()
 
     #     frame, points = findPoints(frame)
@@ -131,9 +132,9 @@ def main():
     #     cv2.imshow("frame", frame)
 
     #To be able to stop the programm
-    # key = cv2.waitKey(1) & 0xFF
-    # if key == ord("q"): 
-    #     break
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord("q"): 
+            break
 
 if __name__ == "__main__":
     main()
