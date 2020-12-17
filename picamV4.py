@@ -107,20 +107,20 @@ def calculateDistances(points):
 def main():
     cam = USBcamControl()
 
-    frame = cam.capture()
+    # frame = cam.capture()
 
-    frame, points = findPoints(frame)
+    # frame, points = findPoints(frame)
 
-    calculateDistances(points)
+    # calculateDistances(points)
     
 
     while True:
 
-        # frame = cam.capture()
+        frame = cam.capture()
 
-        # frame, mask, points = findPoints(frame)
+        frame, points = findPoints(frame)
 
-        # calculateDistances(points)
+        calculateDistances(points)
         
         # cv2.imshow("mask", mask)
         cv2.imshow("frame", frame)
