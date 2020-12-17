@@ -120,7 +120,7 @@ def main():
 
         frame, mask, points = findPoints(frame)
 
-        #calculateDistances(points)
+        calculateDistances(points)
         
         cv2.imshow("mask", mask)
         cv2.imshow("frame", frame)
