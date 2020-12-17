@@ -23,6 +23,12 @@ class point():
     def __init__(self, X, Y, ID):
         self.coordinates = [X, Y]
         self.ID = ID
+
+        point = []
+        distances = []
+    
+    def storeDistances(self, point, distance):
+
     
 ####### Finding points
 def connectedComponentAnalysis(frame):
@@ -98,17 +104,12 @@ def calculateDistances(points):
             else:
                 distance = np.sqrt((x1-x2)**2 + (y1-y2)**2)
                 dist_list.append(distance)
-
-                print(f"Point {ID1} x: {x1} y: {y1}")
-                print(f"Point {ID2} x: {x2} y: {y2}")
-                print(f"Distance between = {distance}")
-
-        print(f"Point {ID1} distances are: {dist_list}")
-        all_dist.append(dist_list)
+        
+        all_dist.append(dist_list.sort())
         
     print(f"All distances = {all_dist}")
 
-
+def drawLines():
         
 
 def main():
