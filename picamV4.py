@@ -48,7 +48,7 @@ def connectedComponentAnalysis(frame):
         numPixels = cv2.countNonZero(labelMask)
         # if the number of pixels in the component is sufficiently
         # large, then add it to our mask of "large blobs"
-        if numPixels > 4:
+        if numPixels > 3:
             mask = cv2.add(mask, labelMask)
     return mask
 
