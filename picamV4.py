@@ -70,7 +70,7 @@ def findPoints(frame):
     thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)[1]
 
     mask = connectedComponentAnalysis(thresh)
-    frame = findContours(thresh, mask)
+    frame = findContours(frame, mask)
     return frame
 
 
