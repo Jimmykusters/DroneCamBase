@@ -102,8 +102,8 @@ def calculateDistances(points):
             else:
                 distance = np.sqrt((x1-x2)**2 + (y1-y2)**2)
                 dist_list.append(distance)
-        
-        all_dist.append(dist_list)
+        sort_list = dist_list.sort()
+        all_dist.append(sort_list)
         
     print(f"All distances = {all_dist}")
         
