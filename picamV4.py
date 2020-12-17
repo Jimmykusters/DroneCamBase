@@ -48,7 +48,7 @@ def connectedComponentAnalysis(frame):
         numPixels = cv2.countNonZero(labelMask)
         # if the number of pixels in the component is sufficiently
         # large, then add it to our mask of "large blobs"
-        if numPixels > 5:
+        if numPixels > 4:
             mask = cv2.add(mask, labelMask)
     return mask
 
@@ -77,7 +77,7 @@ def findPoints(frame):
 
     mask = connectedComponentAnalysis(thresh)
     frame, points = findContours(frame, mask)
-    return frame, points
+    return frame, mask, points
 
 ######## Find triangles
 def calculateDistances(points):
@@ -118,10 +118,11 @@ def main():
 
         frame = cam.capture()
 
-        frame, points = findPoints(frame)
+        frame, mask, points = findPoints(frame)
 
-        calculateDistances(points)
-
+        #calculateDistances(points)
+        
+        cv2.imshow("mask", mask)
         cv2.imshow("frame", frame)
 
     #To be able to stop the programm
