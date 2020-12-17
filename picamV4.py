@@ -26,8 +26,6 @@ class point():
 
         point = []
         distances = []
-    
-    def storeDistances(self, point, distance):
 
     
 ####### Finding points
@@ -108,10 +106,7 @@ def calculateDistances(points):
         all_dist.append(dist_list.sort())
         
     print(f"All distances = {all_dist}")
-
-def drawLines():
         
-
 def main():
     cam = USBcamControl()
 
