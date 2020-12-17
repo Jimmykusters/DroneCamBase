@@ -81,6 +81,7 @@ def calculateDistances(points):
     for pnt in points:
         #bepaal coordinaten voor dit punt
         ID1 = pnt.ID
+        print(f"Main Run : {ID1}")
         x1 = pnt.coordinates[0]
         y1 = pnt.coordinates[1]
         distance = 0
@@ -88,8 +89,10 @@ def calculateDistances(points):
 
         for pnt2 in points:
             ID2 = pnt2.ID
+            print(f"Sub RUn : {ID2}")
             x2 = pnt2.coordinates[0]
             y2 = pnt2.coordinates[1]
+
             if ID1 == ID2:
                 pass
             else:
@@ -99,6 +102,7 @@ def calculateDistances(points):
                 print(f"Point {ID1} x: {x1} y: {y1}")
                 print(f"Point {ID2} x: {x2} y: {y2}")
                 print(f"Distance between = {distance}")
+
         print(f"Point {ID1} distances are: {dist_list}")
         all_dist.append(dist_list)
         
