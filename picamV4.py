@@ -19,38 +19,51 @@ class USBcamControl():
         self.frame = cv2.rotate(self.frame, cv2.ROTATE_180)
         return self.frame
 
+class point():
+    def __init__(self, X, Y, ID):
+        self.coordinates = [X, Y]
+        self.ID = ID
+
+def connectedComponentAnalysis(frame):
+    # perform a connected component analysis on the thresholded
+    # image, then initialize a mask to store only the "large"
+    # components
+    labels = measure.label(frame, background=0)
+    mask = np.zeros(frame.shape, dtype="uint8")
+    # loop over the unique components
+    for label in np.unique(labels):
+        # if this is the background label, ignore it
+        if label == 0:
+            continue
+        # otherwise, construct the label mask and count the
+        # number of pixels 
+        labelMask = np.zeros(frame.shape, dtype="uint8")
+        labelMask[labels == label] = 255
+        numPixels = cv2.countNonZero(labelMask)
+        # if the number of pixels in the component is sufficiently
+        # large, then add it to our mask of "large blobs"
+        if numPixels > 5:
+            mask = cv2.add(mask, labelMask)
+    return mask
+
+def findPoints(frame):
+    # Convert to gray scale image & put an threshold on the image
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)[1]
+
+    mask = connectedComponentAnalysis(thresh)
+    print(f"Mask = {mask}")
+    print("")
+    return mask
+
+
 def main():
     cam           = USBcamControl()
 
     while True:
         frame = cam.capture()
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        #blurred = cv2.GaussianBlur(gray, (11, 11), 0)
-
-        # threshold the image to reveal light regions in the
-        # blurred image
-        thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)[1]
-
-        # perform a connected component analysis on the thresholded
-        # image, then initialize a mask to store only the "large"
-        # components
-        labels = measure.label(thresh, background=0)
-        mask = np.zeros(thresh.shape, dtype="uint8")
-        # loop over the unique components
-        for label in np.unique(labels):
-            # if this is the background label, ignore it
-            if label == 0:
-                continue
-            # otherwise, construct the label mask and count the
-            # number of pixels 
-            labelMask = np.zeros(thresh.shape, dtype="uint8")
-            labelMask[labels == label] = 255
-            numPixels = cv2.countNonZero(labelMask)
-            # if the number of pixels in the component is sufficiently
-            # large, then add it to our mask of "large blobs"
-            if numPixels > 5:
-                mask = cv2.add(mask, labelMask)
+        findPoints(frame)
 
         # find the contours in the mask, then sort them from left to
         # right
@@ -74,8 +87,6 @@ def main():
         # thresh = cv2.erode(thresh, None, iterations=2)
         # thresh = cv2.dilate(thresh, None, iterations=4)
         cv2.imshow("frame", frame)
-
-        cv2.imshow("Thresh hold image", mask)
 
         #To be able to stop the programm
         key = cv2.waitKey(1) & 0xFF
