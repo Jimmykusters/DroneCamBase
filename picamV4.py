@@ -63,7 +63,7 @@ def main():
     while True:
         frame = cam.capture()
 
-        findPoints(frame)
+        mask = findPoints(frame)
 
         # find the contours in the mask, then sort them from left to
         # right
