@@ -108,7 +108,7 @@ def main():
 
     frame = cam.capture()
 
-    frame, points = findPoints(frame)s
+    frame, points = findPoints(frame)
 
     calculateDistances(points)
 
