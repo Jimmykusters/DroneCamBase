@@ -48,7 +48,7 @@ def connectedComponentAnalysis(frame):
         numPixels = cv2.countNonZero(labelMask)
         # if the number of pixels in the component is sufficiently
         # large, then add it to our mask of "large blobs"
-        if numPixels > 3:
+        if numPixels > 2:
             mask = cv2.add(mask, labelMask)
     return mask
 
@@ -64,8 +64,8 @@ def findContours(frame, mask):
         (x, y, w, h) = cv2.boundingRect(c)
         ((cX, cY), radius) = cv2.minEnclosingCircle(c)
         if radius < 10:
-            cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
-            cv2.putText(frame, "#{}".format(i), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+            cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 2)
+            # cv2.putText(frame, "#{}".format(i), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
             #Add point to list
             points.append(point(cX, cY, i))
     return frame, points
