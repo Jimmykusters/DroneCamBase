@@ -77,7 +77,7 @@ def findPoints(frame):
 
     mask = connectedComponentAnalysis(thresh)
     frame, points = findContours(frame, mask)
-    return frame, mask, points
+    return frame, points
 
 ######## Find triangles
 def calculateDistances(points):
