@@ -80,8 +80,8 @@ def main():
     while True:
         frame = cam.capture()
 
-        mask = findPoints(frame)
-        
+        frame = findPoints(frame)
+
         cv2.imshow("frame", frame)
 
         #To be able to stop the programm
