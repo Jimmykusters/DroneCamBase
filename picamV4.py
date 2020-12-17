@@ -46,13 +46,32 @@ def connectedComponentAnalysis(frame):
             mask = cv2.add(mask, labelMask)
     return mask
 
+def findContours(frame, mask):
+    points = []
+    # find the contours in the mask, then sort them from left to right
+    Contours = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    Contours = imutils.grab_contours(Contours)
+    Contours = contours.sort_contours(Contours)[0]
+    # loop over the contours
+    for (i, c) in enumerate(Contours):
+        # draw the bright spot on the image
+        (x, y, w, h) = cv2.boundingRect(c)
+        ((cX, cY), radius) = cv2.minEnclosingCircle(c)
+        print(f"point {i} = [X:{cX};Y:{cY}]")
+        if radius < 10:
+            cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
+            cv2.putText(frame, "#{}".format(i), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+    return frame
+    
+
 def findPoints(frame):
     # Convert to gray scale image & put an threshold on the image
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)[1]
 
     mask = connectedComponentAnalysis(thresh)
-    return mask
+    frame = findContours(thresh, mask)
+    return frame
 
 
 def main():
@@ -62,28 +81,7 @@ def main():
         frame = cam.capture()
 
         mask = findPoints(frame)
-
-        # find the contours in the mask, then sort them from left to
-        # right
-        cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        cnts = imutils.grab_contours(cnts)
-        cnts = contours.sort_contours(cnts)[0]
-        # loop over the contours
-        for (i, c) in enumerate(cnts):
-            # draw the bright spot on the image
-
-            (x, y, w, h) = cv2.boundingRect(c)
-            ((cX, cY), radius) = cv2.minEnclosingCircle(c)
-            print(f"point {i} = [X:{cX};Y:{cY}]")
-            if radius < 10:
-                cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 3)
-                cv2.putText(frame, "#{}".format(i), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-        # show the output image
-
-        # perform a series of erosions and dilations to remove
-        # any small blobs of noise from the thresholded image
-        # thresh = cv2.erode(thresh, None, iterations=2)
-        # thresh = cv2.dilate(thresh, None, iterations=4)
+        
         cv2.imshow("frame", frame)
 
         #To be able to stop the programm
