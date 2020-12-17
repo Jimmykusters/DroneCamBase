@@ -52,8 +52,6 @@ def findPoints(frame):
     thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)[1]
 
     mask = connectedComponentAnalysis(thresh)
-    print(f"Mask = {mask}")
-    print("")
     return mask
 
 
@@ -64,7 +62,8 @@ def main():
         frame = cam.capture()
 
         mask = findPoints(frame)
-
+        cv2.imshow("mask", mask)
+        
         # find the contours in the mask, then sort them from left to
         # right
         cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
