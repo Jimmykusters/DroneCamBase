@@ -24,7 +24,7 @@ class point():
         self.coordinates = [X, Y]
         self.ID = ID
     
-
+####### Finding points
 def connectedComponentAnalysis(frame):
     # perform a connected component analysis on the thresholded
     # image, then initialize a mask to store only the "large"
@@ -65,7 +65,6 @@ def findContours(frame, mask):
             points.append(point(cX, cY, i))
     return frame, points
     
-
 def findPoints(frame):
     # Convert to gray scale image & put an threshold on the image
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -75,6 +74,32 @@ def findPoints(frame):
     frame, points = findContours(frame, mask)
     return frame, points
 
+######## Find triangles
+def calculateDistances(points):
+    #Bereken voor alle punten
+    for pnt in points:
+        #bepaal coordinaten voor dit punt
+        ID1 = pnt.ID
+        x1 = pnt.coordinates[0]
+        y1 = pnt.coordinates[1]
+        distance = 0
+        dist_list = []
+        sort_dist = []
+
+        for pnt in points:
+            ID2 = pnt.ID
+            x2 = pnt.coordinates[0]
+            y2 = pnt.coordinates[1]
+            if ID1 == ID2:
+                pass
+            else:
+                distance = np.sqrt((x1-x2)**2 + (y1-y2)**2)
+                dist_list.append(distance)
+
+        print(f"List of distances = {dist_list}")
+
+
+        
 
 def main():
     cam = USBcamControl()
