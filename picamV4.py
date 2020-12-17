@@ -23,6 +23,9 @@ class point():
     def __init__(self, X, Y, ID):
         self.coordinates = [X, Y]
         self.ID = ID
+    
+    def coordinates(self):
+        return self.coordinates
 
 def connectedComponentAnalysis(frame):
     # perform a connected component analysis on the thresholded
@@ -77,14 +80,15 @@ def findPoints(frame):
 
 
 def main():
-    cam           = USBcamControl()
+    cam = USBcamControl()
 
     while True:
         frame = cam.capture()
 
         frame, points = findPoints(frame)
 
-        print(f"Points = {points}")
+        for counter, point in enumerate(points):
+            print(f"Point {counter} = {point.coordinates()}")
 
         cv2.imshow("frame", frame)
 
