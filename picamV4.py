@@ -51,7 +51,7 @@ class point():
 class triangle(point):
     def __init__(self, pnt):
         self.points = [pnt]
-        self.num_pnt_val = self.points.count()
+        self.num_pnt_val = len(self.points)
 
         self.oth_pnts, self.oth_dis = self.pnt1.provideClosestNeighbours()
         self.oth_pnts.append(pnt.ID)
