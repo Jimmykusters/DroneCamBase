@@ -94,8 +94,7 @@ def findContours(frame, mask):
 def findPoints(frame):
     # Convert to gray scale image & put an threshold on the image
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    processed_img = cv2.GaussianBlur(gray, (3,3), 0)
-    thresh = cv2.threshold(processed_img, 180, 255, cv2.THRESH_BINARY)[1]
+    thresh = cv2.threshold(gray, 190, 255, cv2.THRESH_BINARY)[1]
 
     mask = connectedComponentAnalysis(thresh)
     frame, points = findContours(frame, mask)
