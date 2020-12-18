@@ -24,10 +24,10 @@ class point():
         self.coordinates = [X, Y]
         self.ID = ID
 
+    # A function that stores all distances to all points from this point
     def storeDist(self, pnt, dis):
         self.pnt = pnt
         self.dis = dis
-        print(f"Point {self.ID} has stored pnt: {self.pnt}, with dis: {self.dis}")
 
     def provideClosestNeighbours(self):
         pnt_temp = []
@@ -46,7 +46,9 @@ class point():
                 self.dis.pop(min_index)
         except:
             print("An Error occourd prehaps the provided data is empty")
-        print(f"Solved points: {pnt_temp}, distances: {dis_temp}")
+
+        return pnt_temp, dis_temp
+
 
 
     
@@ -125,6 +127,20 @@ def calculateDistances(points):
         
         pnt.storeDist(pnt_list, dist_list)
         pnt.provideClosestNeighbours()
+
+def groupPointsToTriangles(points):
+    temp_triangle = []
+
+    for pnt in points:
+        check = []
+        check.append(pnt.ID)
+        neig_pnt, neig_dis = pnt.provideClosestNeighbours()
+        check.append(neig_pnt)
+        check.sort()
+        print(f"point {pnt.ID} check:{check}")
+
+
+
 
 def main():
     cam = USBcamControl()
