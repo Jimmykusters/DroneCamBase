@@ -164,7 +164,7 @@ def main():
         frame, points = findPoints(frame)
 
         calculateDistances(points)
-        groupPointsToTriangles(points)
+        makeTriangles(points)
         
         # cv2.imshow("mask", mask)
         cv2.imshow("frame", frame)
