@@ -34,17 +34,18 @@ class point():
         dis_temp = []
 
         print(f"Distances: {self.dis}")
+        try:
+            for i in range(2):
+                min_value = min(self.dis)
+                min_index = self.dis.index(min_value)
 
-        for i in range(2):
-            min_value = min(self.dis)
-            min_index = self.dis.index(min_value)
+                pnt_temp.append(self.pnt[min_index])
+                dis_temp.append(self.dis[min_index])
 
-            pnt_temp.append(self.pnt[min_index])
-            dis_temp.append(self.dis[min_index])
-
-            self.pnt.pop(min_index)
-            self.dis.pop(min_index)
-
+                self.pnt.pop(min_index)
+                self.dis.pop(min_index)
+        except:
+            print("An Error occourd prehaps the provided data is empty")
         print(f"Solved points: {pnt_temp}, distances: {dis_temp}")
 
 
