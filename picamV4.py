@@ -33,7 +33,6 @@ class point():
         pnt_temp = []
         dis_temp = []
 
-        print(f"Distances: {self.dis}")
         try:
             for i in range(2):
                 min_value = min(self.dis)
@@ -50,8 +49,6 @@ class point():
         return pnt_temp, dis_temp
 
 
-
-    
 ####### Finding points
 def connectedComponentAnalysis(frame):
     # perform a connected component analysis on the thresholded
@@ -126,7 +123,6 @@ def calculateDistances(points):
                 dist_list.append(distance)
         
         pnt.storeDist(pnt_list, dist_list)
-        pnt.provideClosestNeighbours()
 
 def groupPointsToTriangles(points):
     temp_triangle = []
@@ -159,6 +155,7 @@ def main():
         frame, points = findPoints(frame)
 
         calculateDistances(points)
+        groupPointsToTriangles(points)
         
         # cv2.imshow("mask", mask)
         cv2.imshow("frame", frame)
