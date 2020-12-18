@@ -28,6 +28,26 @@ class point():
         self.pnt = pnt
         self.dis = dis
         print(f"Point {self.ID} has stored pnt: {self.pnt}, with dis: {self.dis}")
+
+    def provideClosestNeighbours(self):
+        pnt_temp = []
+        dis_temp = []
+
+        print(f"Distances: {self.dis}")
+
+        for i in range(2):
+            min_value = min(self.dis)
+            min_index = self.dis.index(min_value)
+
+            pnt_temp.append(self.pnt[min_index])
+            dis_temp.append(self.dis[min_index])
+
+            self.pnt.pop(min_index)
+            self.dis.pop(min_index)
+
+        print(f"Solved points: {pnt_temp}, distances: {dis_temp}")
+
+
     
 ####### Finding points
 def connectedComponentAnalysis(frame):
@@ -103,6 +123,7 @@ def calculateDistances(points):
                 dist_list.append(distance)
         
         pnt.storeDist(pnt_list, dist_list)
+        pnt.provideClosestNeighbours()
 
 def main():
     cam = USBcamControl()
