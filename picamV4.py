@@ -86,16 +86,16 @@ def findContours(frame, mask):
         ((cX, cY), radius) = cv2.minEnclosingCircle(c)
         if radius < 10:
             cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 2)
-            cv2.putText(frame, "#{}".format(i), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1)
+            cv2.putText(frame, "#{}".format(i+1), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1)
             #Add point to list
-            points.append(point(cX, cY, i))
+            points.append(point(cX, cY, i+1))
     return frame, points
     
 def findPoints(frame):
     # Convert to gray scale image & put an threshold on the image
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-    thresh = cv2.threshold(blurred, 180, 255, cv2.THRESH_BINARY)[1]
+    blurred = cv2.GaussianBlur(gray, (6, 6), 0)
+    thresh = cv2.threshold(blurred, 150, 255, cv2.THRESH_BINARY)[1]
 
     mask = connectedComponentAnalysis(thresh)
     frame, points = findContours(frame, mask)
