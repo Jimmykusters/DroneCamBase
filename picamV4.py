@@ -132,7 +132,6 @@ def groupPointsToTriangles(points):
         check.append(pnt.ID)
 
         triangle_pnt = []
-        triangle_pnt.append(pnt.ID)
         neig_pnt, neig_dis = pnt.provideClosestNeighbours()
 
         triangle_pnt.append(pnt.ID)
@@ -141,9 +140,10 @@ def groupPointsToTriangles(points):
         triangle_pnt.sort()
 
         check.append(triangle_pnt)
-        
-        print(f"Check {check}")
+        temp_triangle.append(check)
 
+    for triangle in temp_triangle:
+        print(triangle)
 
 
 
