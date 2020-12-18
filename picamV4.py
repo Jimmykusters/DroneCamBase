@@ -48,6 +48,19 @@ class point():
 
         return pnt_temp, dis_temp
 
+class triangle(point):
+    def __init__(self, pnt):
+        self.points = [pnt]
+        self.num_pnt_val = self.points.count()
+
+        self.oth_pnts, self.oth_dis = self.pnt1.provideClosestNeighbours()
+        self.oth_pnts.append(pnt.ID)
+        self.oth_pnts.sort()
+        print(self.oth_pnts)
+
+    # def add_pnt(self, pnt):
+    #     temp_pnt
+    
 
 ####### Finding points
 def connectedComponentAnalysis(frame):
@@ -124,26 +137,13 @@ def calculateDistances(points):
         
         pnt.storeDist(pnt_list, dist_list)
 
-def groupPointsToTriangles(points):
-    temp_triangle = []
-
-    for pnt in points:
-        check = []
-        check.append(pnt.ID)
-
-        triangle_pnt = []
-        neig_pnt, neig_dis = pnt.provideClosestNeighbours()
-
-        triangle_pnt.append(pnt.ID)
-        triangle_pnt.append(neig_pnt[0])
-        triangle_pnt.append(neig_pnt[1])
-        triangle_pnt.sort()
-
-        check.append(triangle_pnt)
-        temp_triangle.append(check)
-
-    for triangle in temp_triangle:
-        print(triangle)
+def makeTriangles(points):
+    triangles = []
+    pnt_to_def = points.count()
+    print(f"Points to define: {pnt_to_def}")
+    temp_triangle = triangle(points[0])
+    # while pnt_to_def > 0:
+    #     temp_triangle = triangle()
 
 
 
