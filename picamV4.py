@@ -139,7 +139,7 @@ def calculateDistances(points):
 
 def makeTriangles(points):
     triangles = []
-    pnt_to_def = points.count()
+    pnt_to_def = len(points)
     print(f"Points to define: {pnt_to_def}")
     temp_triangle = triangle(points[0])
     # while pnt_to_def > 0:
