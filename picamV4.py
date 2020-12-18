@@ -53,7 +53,7 @@ class triangle(point):
         self.points = [pnt]
         self.num_pnt_val = len(self.points)
 
-        self.oth_pnts, self.oth_dis = self.pnt.provideClosestNeighbours()
+        self.oth_pnts, self.oth_dis = pnt.provideClosestNeighbours()
         self.oth_pnts.append(pnt.ID)
         self.oth_pnts.sort()
         print(self.oth_pnts)
