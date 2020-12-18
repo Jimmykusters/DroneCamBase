@@ -110,7 +110,7 @@ def findContours(frame, mask):
         ((cX, cY), radius) = cv2.minEnclosingCircle(c)
         if radius < 10:
             cv2.circle(frame, (int(cX), int(cY)), int(radius), (0, 0, 255), 2)
-            cv2.putText(frame, "#{}".format(i+1), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1)
+            #cv2.putText(frame, "#{}".format(i+1), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 1)
             #Add point to list
             points.append(point(cX, cY, i+1))
     return frame, points
