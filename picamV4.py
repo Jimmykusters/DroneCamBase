@@ -56,10 +56,22 @@ class triangle(point):
         self.oth_pnts, self.oth_dis = pnt.provideClosestNeighbours()
         self.oth_pnts.append(pnt.ID)
         self.oth_pnts.sort()
-        print(self.oth_pnts)
 
-    # def add_pnt(self, pnt):
-    #     temp_pnt
+    def checkPoint(self, pnt):
+        check = []
+        chk_pnts, dis = pnt.provideClosestNeighbours()
+        check.append(pnt.ID)
+        check.append(chk_pnts[0])
+        check.append(chk_pnts[1])
+        check.sort()
+
+        if self.oth_pnts == check:
+            print(f"Point: {pnt.ID} added to triangle")
+            self.points.append(pnt)
+            return True
+        else:
+            print(f"Point: {pnt.ID} NOT added to triangle")
+            return False
     
 
 ####### Finding points
@@ -138,10 +150,19 @@ def calculateDistances(points):
         pnt.storeDist(pnt_list, dist_list)
 
 def makeTriangles(points):
+    defined_points = []
     triangles = []
     pnt_to_def = len(points)
-    print(f"Points to define: {pnt_to_def}")
-    temp_triangle = triangle(points[0])
+    while pnt_to_def != len(defined_points):
+        for pnt in points:
+            if pnt.ID not in defined_points:
+                temp_triangle = triangle(pnt)
+                defined_points
+            
+            else:
+                pass
+
+
     # while pnt_to_def > 0:
     #     temp_triangle = triangle()
 
@@ -163,8 +184,8 @@ def main():
 
         frame, points = findPoints(frame)
 
-        calculateDistances(points)
-        makeTriangles(points)
+        #calculateDistances(points)
+        #makeTriangles(points)
         
         # cv2.imshow("mask", mask)
         cv2.imshow("frame", frame)
